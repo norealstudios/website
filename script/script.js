@@ -1,3 +1,43 @@
+(function () {
+    const roadmapData = [
+        { title: "Changing all the UI", description: "We're re-doing the ui for a best user experience", status: 2 },
+        { title: "Redoing Shop System", description: "Always for a better User Experience", status: 2 },
+        { title: "Redoing Map Building", description: "A new map for best performance", status: 1 },
+        { title: "Redoing Job", description: "With a new map we thinking are a good choise change the job which were previously monotonous and boring", status: 1 },
+        { title: "Redoing Wall System", description: "For a best experience and a better performance", status: 0 },
+        { title: "Redoing Tools System", description: "For Wall System we must redoing also the tools", status: 0 },
+        { title: "Release Game", description: "??/??/2025", status: 0 },
+    ];
+    const container = document.getElementById('roadmap-content');
+    const lineDiv = document.createElement('div');
+    lineDiv.classList.add('roadmap-line');
+    container.appendChild(lineDiv);
+    const progressDiv = document.createElement('div');
+    progressDiv.classList.add('roadmap-progress');
+    container.appendChild(progressDiv);
+    function getStatus(statusCode) {
+        switch (statusCode) {
+            case 2: return { class: 'status-completed', text: 'Completed', itemClass: 'completed' };
+            case 1: return { class: 'status-active', text: 'In Progress', itemClass: 'active' };
+            default: return { class: 'status-planned', text: 'Planned', itemClass: 'planned' };
+        }
+    }
+    roadmapData.forEach(item => {
+        const status = getStatus(item.status);
+        const itemHTML = `
+<div class="roadmap-item ${status.itemClass}">
+    <div class="roadmap-dot"></div>
+    <div class="roadmap-content">
+    <span class="roadmap-status ${status.class}">${status.text}</span>
+    <h3>${item.title}</h3>
+    <p>${item.description}</p>
+    </div>
+</div>
+`;
+        container.insertAdjacentHTML('beforeend', itemHTML);
+    });
+})();
+
 const defaultConfig = {
     studio_name: "NOREAL STUDIOS",
     hero_tagline: "Creating Immersive Roblox Experiences",
@@ -202,47 +242,6 @@ window.addEventListener('resize', () => {
     canvas.height = window.innerHeight;
 });
 
-
-
-(function () {
-    const roadmapData = [
-        { title: "Changing all the UI", description: "We're re-doing the ui for a best user experience", status: 2 },
-        { title: "Redoing Shop System", description: "Always for a better User Experience", status: 1 },
-        { title: "Redoing Map Building", description: "A new map for best performance", status: 1 },
-        { title: "Redoing Job", description: "With a new map we thinking are a good choise change the job which were previously monotonous and boring", status: 1 },
-        { title: "Redoing Wall System", description: "For a best experience and a better performance", status: 0 },
-        { title: "Redoing Tools System", description: "For Wall System we must redoing also the tools", status: 0 },
-        { title: "Release Game", description: "??/??/2025", status: 0 },
-    ];
-    const container = document.getElementById('roadmap-content');
-    const lineDiv = document.createElement('div');
-    lineDiv.classList.add('roadmap-line');
-    container.appendChild(lineDiv);
-    const progressDiv = document.createElement('div');
-    progressDiv.classList.add('roadmap-progress');
-    container.appendChild(progressDiv);
-    function getStatus(statusCode) {
-        switch (statusCode) {
-            case 2: return { class: 'status-completed', text: 'Completed', itemClass: 'completed' };
-            case 1: return { class: 'status-active', text: 'In Progress', itemClass: 'active' };
-            default: return { class: 'status-planned', text: 'Planned', itemClass: 'planned' };
-        }
-    }
-    roadmapData.forEach(item => {
-        const status = getStatus(item.status);
-        const itemHTML = `
-<div class="roadmap-item ${status.itemClass}">
-    <div class="roadmap-dot"></div>
-    <div class="roadmap-content">
-    <span class="roadmap-status ${status.class}">${status.text}</span>
-    <h3>${item.title}</h3>
-    <p>${item.description}</p>
-    </div>
-</div>
-`;
-        container.insertAdjacentHTML('beforeend', itemHTML);
-    });
-})();
 
 async function onConfigChange(config) {
     const studioName = config.studio_name || defaultConfig.studio_name;
